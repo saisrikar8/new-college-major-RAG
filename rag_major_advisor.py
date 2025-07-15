@@ -17,7 +17,7 @@ class RAGMajorAdvisor:
         self.embedder = SentenceTransformer("all-MiniLM-L6-v2")
         self.llm = genai.GenerativeModel("gemini-2.5-flash")
         self.index = faiss.read_index("studentlife_profiles.faiss")
-        self.metadata = []
+        self.metadata = json.load(open("studentlife_profiles.json", "r"))
         #self._build_vector_db()
 
     def _create_student_profile(self, uid):

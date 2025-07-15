@@ -32,15 +32,6 @@ for uid in df_data['uid'].unique():
         uids.append(uid)
         profile_texts.append('\n'.join(text))
 
-
-        text = [
-            f"Student {uid}:\n"
-        ]
-
-        text = text + data
-        uids.append(uid)
-        profile_texts.append('\n'.join(text))
-
     except Exception as e:
         print(f"Skipping {uid}: {e}")
 
@@ -53,8 +44,9 @@ faiss.write_index(index, "studentlife_profiles.faiss")
 
 with open("studentlife_profiles.json", "w") as f:
     json.dump([
-        {"uid": uid, "profile": text}
+        {"uid": int(uid), "profile": text}
         for uid, text in zip(uids, profile_texts)
     ], f, indent=2)
+
 
 print(f"Stored {len(uids)} student profiles in FAISS.")
