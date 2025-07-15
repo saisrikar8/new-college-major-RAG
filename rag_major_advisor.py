@@ -16,9 +16,9 @@ class RAGMajorAdvisor:
         self.df = pd.read_csv(data_path)
         self.embedder = SentenceTransformer("all-MiniLM-L6-v2")
         self.llm = genai.GenerativeModel("gemini-2.5-flash")
-        self.index = None
+        self.index = faiss.read_index("studentlife_profiles.faiss")
         self.metadata = []
-        self._build_vector_db()
+        #self._build_vector_db()
 
     def _create_student_profile(self, uid):
         """Creates a text chunk for a single student."""
